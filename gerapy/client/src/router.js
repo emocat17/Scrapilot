@@ -85,6 +85,24 @@ const router = new Router({
           name: "taskStatus",
           component: () => import("./views/task/Status.vue"),
         },
+        //  // user management  用户管理
+        {
+          path: "/account",
+          name: "accountIndex",
+          component: () => import("./views/account/Index.vue"),
+        },
+        {
+          path: "/account/create",
+          name: "accountCreate",
+          component: () => import("./views/account/Create.vue"),
+        },
+        {
+          path: "/account/:id/edit",
+          name: "accountEdit",
+          component: () => import("./views/account/Edit.vue"),
+        },
+
+        
       ],
     },
   ],

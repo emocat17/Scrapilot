@@ -122,6 +122,7 @@ export default {
     clients: '主机管理',
     projects: '项目管理',
     tasks: '任务管理',
+    accounts:'用户管理',
   },
   messages: {
     loading: '加载中...',

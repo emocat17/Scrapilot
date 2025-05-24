@@ -22,6 +22,14 @@
           <i class="icon fa fa-hdd-o"></i>
           <span v-text="$lang.menus.tasks" class="text"></span>
         </el-menu-item>
+        <!-- ################### -->
+        <el-menu-item class="menu-list" index="/account">
+          <i class="icon fa fa-users"></i>
+          <span class="text" v-text="$lang.menus.accounts"></span>
+        </el-menu-item>
+
+
+        <!-- ################### -->
       </el-menu>
     </div>
   </div>
