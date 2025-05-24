@@ -2,7 +2,7 @@
   <div class="left-side">
     <div class="left-side-inner">
       <router-link to="/home" class="logo block">
-        <img src="../assets/images/logo.png" alt="Gerapy" />
+        <img src="../assets/images/logo.png" alt="InnovTrace" />
       </router-link>
       <el-menu
         class="menu-box"

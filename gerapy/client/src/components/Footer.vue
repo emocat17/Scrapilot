@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <footer class="footer" v-once>
       Copyright &copy; {{ getYear }} Gerapy All Rights Reserved.
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->

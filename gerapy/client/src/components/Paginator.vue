@@ -11,6 +11,8 @@
     	:total="total_count"
     />
 </template>
+
+
 <script>
 export default {
     name: "Paginator",
