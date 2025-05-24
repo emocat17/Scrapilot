@@ -71,10 +71,16 @@
         </el-table-column>
       </el-table>
     </div>
+    <paginator
+        :current_page="currentPage"
+        :page_size="pageSize"
+        :total_count="totalCount"
+    ></paginator>>
   </div>
 </template>
 <script type="text/javascript">
 import PanelTitle from "../../components/PanelTitle";
+import Paginator from "../../components/Paginator";
 
 export default {
   data() {
@@ -89,6 +95,7 @@ export default {
   },
   components: {
     PanelTitle,
+    Paginator,
   },
   created() {
     // 页面创建时请求数据
