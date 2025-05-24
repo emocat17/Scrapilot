@@ -44,5 +44,10 @@ urlpatterns = [
     url(r'^api/task/(\d+)/remove', views.task_remove, name='task_remove'),
     url(r'^api/task/(\d+)/status', views.task_status, name='task_status'),
     url(r'^api/render', views.render_html, name='render_html'),
+    # 资源可视化
     url(r'^api/index/host/infos', views.index_host_infos, name='index_host_infos'),
+
+    # 用户管理
+    url(r'^api/account/list', views.account_list, name='account_list'),
+    url(r'^api/account/(\d+)/remove', views.account_remove, name='account_remove'),
 ]

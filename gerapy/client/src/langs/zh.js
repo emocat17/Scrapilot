@@ -268,7 +268,21 @@ export default {
     create: '创建',
     upload: '上传',
     clone: '克隆',
-    address: '地址'
+    address: '地址',
+
+    is_superuser: '超级用户',
+    is_staff: '工作人员',
+    is_active: '状态',
+    date_joined: '加入时间',
+    last_login: '最后登录时间',
+    deployed_user_name: '部署者',
+    deployed_client_name: '部署主机',
+    deployed_project_name: '部署项目',
+    deployed_description: '部署描述',
+    deployed_at: '部署时间',
+    priority: '优先级',
+
+    
   },
 
 }

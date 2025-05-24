@@ -89,6 +89,17 @@ export default new Vuex.Store({
       util: {
         render: "/api/render",
       },
+
+      // user management
+      account: {
+        list: "/api/account/list",
+        create: "/api/account/create",
+        info: "/api/account/{id}/info",
+        update: "/api/account/{id}/update",
+        remove: "/api/account/{id}/remove",
+      },
+
+
     },
   },
   mutations: {

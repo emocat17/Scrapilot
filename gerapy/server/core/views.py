@@ -976,6 +976,7 @@ def render_html(request):
         return HttpResponse(html)
 
 
+# 资源可视化
 import psutil
 @log_exception()
 @api_view(['GET'])
@@ -1010,3 +1011,51 @@ def index_host_infos(request):
 
         data = [get_host_info()]
         return JsonResponse({'host_infos': data})
+    
+
+# 用户管理  翻页
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+@log_exception()
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def account_list(request):
+    """
+    account list
+    :param request: request object
+    :return: json
+    """
+    if request.method == 'GET':
+        # 获取单页页数
+        page_size = int(request.query_params.get('pageSize'))
+        # 拿到当前页
+        current_page = int(request.query_params.get('currentPage'))
+        # 根据主键id顺序排序拿到全部数据对象
+        accounts = User.objects.order_by('id')
+        # 创建翻页器Paginator对象，全部数据 单页页数
+        paginator = Paginator(accounts, page_size)
+        # 提取指定页码的数据
+        page_obj = paginator.get_page(current_page)
+        # model_to_dict：模型数据转字典，定义导出的字段
+        fields = ['id', 'username', 'email', 'is_superuser', 'date_joined', 'last_login', 'is_staff', 'is_active']
+        # 最后拼接数据返回
+        return JsonResponse({
+            'currentPage': current_page, 'pageSize': page_size, 'count': paginator.count,
+            'num_pages': paginator.num_pages, 'is_superuser': request.user.is_superuser,
+            'rows': [model_to_dict(item, fields=fields) for item in page_obj.object_list]})
+
+# 删除
+@log_exception()
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def account_remove(request, account_id):
+    """
+    remove account by account_id
+    :param request: request object
+    :param account_id: account id
+    :return: json
+    """
+    if request.method == 'POST':
+        # 根据用户id查询并删除
+        User.objects.filter(id=account_id).delete()
+        return JsonResponse({'result': '1'})

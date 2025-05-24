@@ -1,4 +1,4 @@
-# Automatically created by: gerapy
+# Automatically created
 from setuptools import setup, find_packages
 setup(
     name='arxiv_scraper',
