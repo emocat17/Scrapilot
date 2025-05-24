@@ -1,31 +1,14 @@
 <template>
   <div class="panel">
-    <panel-title :title="$lang.titles.editTask">
-      <router-link
-        :to="{ name: 'taskStatus', params: { id: routeId } }"
-        tag="span"
-      >
-        <el-button type="success" size="mini">
-          <i class="fa fa-sitemap"></i>
-          {{ $lang.buttons.status }}
-        </el-button>
-      </router-link>
-    </panel-title>
-    <div
-      class="panel-body"
-      v-loading="loadData"
-      :element-loading-text="$lang.messages.loading"
-    >
+    <panel-title :title="$lang.titles.editAccount"></panel-title>
+    <div v-loading="loadData" :element-loading-text="$lang.messages.loading" class="panel-body">
       <el-row>
         <el-col :span="10">
-          <substance ref="substance" :id="routeId">
+          <!--					子组件导入使用，并传参-->
+          <substance :id="routeId" ref="substance">
             <template slot="submit">
-              <el-button
-                type="primary"
-                size="small"
-                @click="onSubmitForm"
-                :loading="onSubmitLoading"
-              >
+              <!--					子组件只负责表单操作，不参与接口开发-->
+              <el-button :loading="onSubmitLoading" size="small" type="primary" @click="onSubmitForm">
                 <i class="fa fa-check"></i>
                 {{ $lang.buttons.update }}
               </el-button>
@@ -45,18 +28,20 @@ export default {
     return {
       onSubmitLoading: false,
       loadData: false,
-      routeId: this.$route.params.id,
+      routeId: this.$route.params.id,  // 获取路由中携带的参数
     };
   },
   methods: {
     onSubmitForm() {
+      // 调用子组件form实力，校验成功后进行接口请求
       this.$refs.substance.$refs.form.validate((valid) => {
         if (!valid) return false;
         this.onSubmitLoading = true;
         let formData = this.$refs.substance.formData;
+        // 执行更新
         this.$http
           .post(
-            this.formatString(this.$store.state.url.task.update, {
+            this.formatString(this.$store.state.url.account.update, {
               id: this.routeId,
             }),
             formData
@@ -79,3 +64,4 @@ export default {
   },
 };
 </script>
+

@@ -14,6 +14,7 @@ export default {
     items: '实体',
     task: '任务',
     tasks: '任务',
+    accounts:'用户',
   },
   buttons: {
     refresh: '刷新',
@@ -117,6 +118,8 @@ export default {
     later10Min: '10分钟后',
     laterHalfHour: '半小时后',
     later1Hour: '1小时后',
+
+    editAccount:'用户管理',
   },
   menus: {
     clients: '主机管理',
@@ -232,6 +235,7 @@ export default {
     database: '数据库',
     user: '用户名',
     username: '用户名',
+    email:'邮箱',
     password: '密码',
     auth: '认证',
     spider: '爬虫',
@@ -282,7 +286,7 @@ export default {
     deployed_at: '部署时间',
     priority: '优先级',
 
-    
+
   },
 
 }

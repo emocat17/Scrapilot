@@ -50,4 +50,10 @@ urlpatterns = [
     # 用户管理
     url(r'^api/account/list', views.account_list, name='account_list'),
     url(r'^api/account/(\d+)/remove', views.account_remove, name='account_remove'),
+
+    # 用户管理按钮功能
+    url(r'^api/account/create', views.account_create, name='account_create'),
+    url(r'^api/account/(\d+)/info', views.account_info, name='account_info'),
+    url(r'^api/account/(\d+)/update', views.account_update, name='account_update'),
+
 ]

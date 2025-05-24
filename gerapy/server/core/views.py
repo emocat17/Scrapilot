@@ -1059,3 +1059,80 @@ def account_remove(request, account_id):
         # 根据用户id查询并删除
         User.objects.filter(id=account_id).delete()
         return JsonResponse({'result': '1'})
+    
+
+import datetime
+# 用户管理界面按钮
+@log_exception()
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def account_create(request):
+    """
+    add account
+    :param request: request object
+    :return: Bool
+    """
+    if request.method == 'POST':
+        add_suc = '0'
+        try:
+        	# request.body获取post表单内容
+            data = json.loads(request.body)
+            # update_or_create但不存在是则创建，存在时则返回已存在数据
+            account, created = User.objects.update_or_create(email=data.get('email'), username=data.get('username'))
+            account.set_password(data.get('password'))
+            account.is_active = True if data.get('is_active') == 1 else False
+            account.is_superuser = False
+            account.date_joined = datetime.now(timezone.utc)
+            account.is_staff = True if data.get('is_staff') == 1 else False
+            account.save()
+            add_suc = '1'
+        except Exception as e:
+            logger.error(e)
+        return JsonResponse({'result': add_suc})
+
+
+@log_exception()
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def account_update(request, account_id):
+    """
+    update account info
+    :param request: request object
+    :param account_id: account id
+    :return: json
+    """
+    if request.method == 'POST':
+        account = User.objects.get(id=account_id)
+        data = json.loads(request.body)
+        if data.get('password'):
+            password = data.pop('password')
+            account.set_password(password)
+        account.username = data['username']
+        account.email = data['email']
+        account.is_active = True if data.get('is_active') == 1 else False
+        account.is_staff = True if data.get('is_staff') == 1 else False
+        account.save()
+        return JsonResponse(model_to_dict(User.objects.get(id=account_id)))
+
+
+@log_exception()
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def account_info(request, account_id):
+    """
+    get account info
+    :param request: request object
+    :param account_id: account id
+    :return: json
+    """
+    if request.method == 'GET':
+    	# 根据用户id获取用户数据
+        account = User.objects.get(id=account_id)
+        data = {
+            'username': account.username,
+            'email': account.email,
+            'is_staff': 1 if account.is_staff else 0,
+            'is_active': 1 if account.is_active else 0,
+            'password': None,
+        }
+        return JsonResponse({'data': data})
